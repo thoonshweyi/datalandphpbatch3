@@ -1,0 +1,7 @@
+php Hypertext Preprocessor
+
+8.1.5 8.2
+
+apache webserver software
+mysql database server software
+-php only need apache
