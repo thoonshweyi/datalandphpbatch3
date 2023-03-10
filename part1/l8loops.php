@@ -24,9 +24,41 @@
 
 
     // for loop
-    // for(statement1;statement2;statement3){
-        // code to executed;
-    // }
+        // for(statement1;statement2;statement3){
+            // code to executed;
+        // }
+
+
+    // foreach loop
+        // foreach(mainarray as value){
+
+        // }
+
+        // foreach(mainarray as key => value){
+            //code to be executed
+        // }
+
+
+    // whileloop
+        // start
+        // while(condition is true){
+        //     code to be executed
+        //     inn or dec
+        // }
+
+        // do...while loop 
+        // start
+
+        // do{
+            // code to be executed
+            // inn or dec
+        // }while(condition is true)
+
+        // $x = 1;
+        // do{
+        //     echo "this number is = $x <br/>";
+        //     $x++;
+        // }while($x <= 5);
 
     for($i = 0; $i < count($colorones); $i++){
         // echo "$i";
@@ -37,6 +69,39 @@
     }
     echo "<hr/>";
 
+    // foreach($colorones as $colorone){
+    //     echo "This is indexed array or manual array by foreach = ".$colorone."<br/>";
+    // }
+
+    foreach($colorones as $key=>$colorone){
+        echo "This is indexed array or manual array by foreach = index key is ". $key ." and value is ".$colorone . "<br/>";
+    }
+
+    echo "<hr/>";
+
+    $x = 0;
+    while($x < count($colorones)){
+
+        // echo $colorones[$x]."<br/>";
+
+        // echo "This is indexed array or manual array by while = index key is ". $x ." and value is ".$colorones[$x] . "<br/>";
+        echo "This is indexed array or manual array by while = index key is ". $coloroneskey[$x] ." and value is ".$colorones[$x] . "<br/>";
+
+        $x++;
+    }
+
+    echo "<hr/>";
+
+    $y = 0;
+
+    do{
+        // echo "this is indexxed array by dowhile = index key is ". $y . " and value is ".$colorones[$y]."<br/>";
+        echo "this is indexxed array by dowhile = index key is ". $coloroneskey[$y] . " and value is ".$colorones[$y]."<br/>";
+        $y++;
+    }while($y < count($colorones));
+    echo "<hr/>";
+
+    
     $posts = [
         "postone"=>"this is news post one",
         "posttwo"=>"this is news post two",
@@ -52,8 +117,33 @@
         // echo "<br/>";
         echo "This is associative array by forloop = index key is ". $postskey[$x] ." and value is ".$posts[$postskey[$x]] . "<br/>";
     }
-
+    
     echo "<hr/>";
+    
+    foreach($posts as $key=>$post){
+        echo "This is associative array by foreach = index key is ". $key ." and value is ".$post . "<br/>";
+        
+    }
+    echo "<hr/>";
+
+    $x = 0;
+    while($x < count($posts)){
+
+        echo "This is associative array by while = index key is ". $postskey[$x] ." and value is ".$posts[$postskey[$x]] . "<br/>";
+
+        $x++;
+    }
+    echo "<hr/>";
+
+    $y = 0;
+    do{
+        echo "This is associative array by dowhile = index key is ". $postskey[$y] ." and value is ".$posts[$postskey[$y]] . "<br/>";
+        $y++;
+    }while($y < count($posts));
+    echo "<hr/>";
+
+
+
     $employees = [
         ["name"=>"Aung Aung","gender"=>"Male"],
         ["name"=>"Su Su","gender"=>"Female"],
@@ -76,6 +166,47 @@
             echo "This is multidimensional array by forloop = index key is ". $newkey[$j] ." and value is ". $employees[$k][$newkey[$j]]. "<br/>";
         }
     }
+
+    echo "<hr/>";
+    
+    foreach($employees as $index=>$employee){
+        // echo $employee;
+        foreach($employee as $key=>$value){
+            // echo $value;
+            echo "This is multidimensional array by foreach = index key is ". $key ." and value is ". $value. "<br/>";
+
+        }
+    }
+    echo "<hr/>";
+
+    $x = 0;
+    $key = array_keys($employees);
+    while($x < count($employees)){
+        // echo $x;
+        $newkey = array_keys($employees[$key[$x]]);
+        
+        $y = 0;
+        while($y < count($newkey)){
+            echo "This is multidimensional array by while = key is ". $newkey[$y]. " and value is ". $employees[$x][$newkey[$y]]. "<br/>";
+            $y++;
+        }
+        $x++;
+    }
+
+    echo "<hr/>";
+
+    $g = 0;
+    do{
+        $newkey = array_keys($employees[$key[$g]]);
+
+        $h = 0;
+        do{
+            echo "This is multidimensional array by dowhile = key is ". $newkey[$h]. " and value is ". $employees[$g][$newkey[$h]]. "<br/>";
+            $h++;
+        }while($h < count($newkey));
+
+        $g++;
+    }while($g < count($employees));
+    
 ?>  
 
-<!-- 17BT -->
