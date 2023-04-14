@@ -1,0 +1,13 @@
+=>Array Methods
+    =>array_chunk()
+        array_chunk(array,size,preserve key)
+
+        - break down array
+
+
+    =>array_combine()
+        array_combine(keyarray,valuearray)
+
+        - combine two array into related keys and values
+
+    =>
