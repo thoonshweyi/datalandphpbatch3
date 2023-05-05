@@ -1,13 +1,150 @@
 =>Array Methods
+    =>count()
+        - return array length
+    
+    =>array_key_exists() Function
+        array_key_exists(key,array) Function
+        
+        - return true (key exists) and false (key does not exists)
+        *case sensitive
+    ----------------------------------------------------------------------------------------------
     =>array_chunk()
         array_chunk(array,size,preserve key)
 
         - break down array
 
+    =>array_count_values()
+        array_count_values(array)
+        
+        - count the same values
 
+    =>array_keys() Function
+        array_keys(array)
+        array_keys(array,value,strict)
+                                :optional
+        - return an array with key names
+        - return an array with key names that contain value
+
+        *strict means using === operator
+
+    =>array_multisort()
+        array_multisort(array)
+
+        - return an array with sorthing value a-z or min-max
+        *even numeric value can sort
+
+        =>sort()
+            sort(array)
+
+            - return an array with sorthing value a-z or min-max
+            *even numeric value can sort
+    ----------------------------------------------------------------------------------------------
+
+    =>array_pop()
+        array_pop(array)
+
+    ----------------------------------------------------------------------------------------------
     =>array_combine()
         array_combine(keyarray,valuearray)
 
-        - combine two array into related keys and values
+        - combine two array into related keys and values and return as a sigle array
 
-    =>
+
+
+    =>array_intersect()
+        array_intersect(mainarray,array1,array2,...)
+                    
+        - return an array with the values which are include in both main array and other arrays
+
+    =>array_diff()
+        array_diff(mainarray,array1,array2,...)
+
+        - return an array with the values of the main array which are not include in other arrays
+        * Only need to consider values
+        *change in array position will get different return array
+
+    =>array_diff_assoc()
+        array_diff_assoc(mainarray,array1,array2,...)
+        
+        - return an array with the values of the main array which are not include in other arrays
+        * just for assoc array
+        * Need to consider both index key and value
+        *change in array position will get different return array
+
+
+    =>array_merge() 
+        array_merge(array1,array2,array3)
+
+        - return an array with merging all arrays
+    __________________________________________________________________________________________________
+    =>array_fill()
+        array_fill(start,length,value)
+
+        - return a new array with number indexes
+
+    =>array_fill_keys()
+        array_fill_keys(keyarray,value)
+
+        - return a new array with assoc indexes
+
+    =>array_pad()
+        array_pad(array,length,value)
+
+        - return an array with filling the value if needed
+    __________________________________________________________________________________________________
+    callbacks
+    =>array_filter()
+        array_filter(array,callbackfunction,flag)
+
+        - return an array with the filtered values
+
+        $num = [1,2,3,4,3];
+        function getodd($var){
+            return($var & 1);
+        }
+        echo "<pre>".print_r(array_filter($num,"getodd"),"true")."</pre>"; //
+
+        /*
+            Array
+            (
+                [0] => 1
+                [2] => 3
+                [4] => 3
+            )
+        */
+
+    =>array_map()
+        array_map(callbackfunction,array1,array2,array3,...)
+        
+        -returns an array containing the results of applying the callback to the corresponding value of array
+
+        $males = ["Tun Tun","Zaw Zaw","Aung Aung","Kyaw Kyaw","Thura"];
+        $females = array("Hla Hla","Mya Mya","Su Su","Nu Nu","Yu Yu");
+
+        function genderone($name){
+            return ("Mr.".$name);
+        }
+        function gendertwo($male,$female){
+            return ($male." & ".$female);
+        }
+        echo "<pre>".print_r(array_map("genderone",$males),"true")."</pre>"; 
+        echo "<pre>".print_r(array_map("gendertwo",$males,$females),"true")."</pre>"; 
+
+        /*
+            Array
+            (
+                [0] => Mr.Tun Tun
+                [1] => Mr.Zaw Zaw
+                [2] => Mr.Aung Aung
+                [3] => Mr.Kyaw Kyaw
+                [4] => Mr.Thura
+            )
+            Array
+            (
+                [0] => Tun Tun & Hla Hla
+                [1] => Zaw Zaw & Mya Mya
+                [2] => Aung Aung & Su Su
+                [3] => Kyaw Kyaw & Nu Nu
+                [4] => Thura & Yu Yu
+            )
+        */

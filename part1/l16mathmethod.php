@@ -17,7 +17,7 @@
     echo round(32.44)."<br/>"; // 32
     echo round(-32.64)."<br/>"; // -32
 
-    echo ceil(-32.64)."<br/>"; // 32
+    echo round(-32.14)."<br/>"; // 32
     echo "<hr/>";
 
     // ceil() Function

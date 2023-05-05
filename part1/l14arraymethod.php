@@ -317,10 +317,12 @@
         // array_shift() Function
         // array_shift(array)
         $colors = array("red","green","blue");
-        array_shift($colors); //red
+        echo array_shift($colors);
+        // array_shift($colors); //red
         echo "<pre>".print_r($colors,"true")."</pre>";
 
         $colors = ["a"=>"red","b"=>"green","g"=>"violet","c"=>"blue"];
+        // echo array_shift($colors);
         array_shift($colors);
         echo "<pre>".print_r($colors,"true")."</pre>";
 
@@ -386,6 +388,7 @@
             $colors = array("red","green","blue","yellow","black");
 
             // echo "<pre>".print_r(array_splice($colors,2),"true")."</pre>";    // blue to black
+            // echo "<pre>".print_r($colors,"true")."</pre>";  
 
             // echo "<pre>".print_r(array_splice($colors,2,1),"true")."</pre>";    // blue
             // echo "<pre>".print_r(array_splice($colors,2,3),"true")."</pre>";    // blue to black
@@ -396,14 +399,14 @@
 
             $males = ["aung aung","maung maung","kyaw kyaw","zaw zaw","naung naung"];
             $females = ["su su","yu yu","nu nu"];
-            // array_splice($males,0,2,$females);
-            // echo "<pre>".print_r($males,"true")."</pre>";    // susu yuyu nunu kyky zwzw ngng
+            array_splice($males,0,2,$females);
+            echo "<pre>".print_r($males,"true")."</pre>";    // susu yuyu nunu kyky zwzw ngng
 
             // array_splice($males,0,3,$females);
             // echo "<pre>".print_r($males,"true")."</pre>";    // susu yuyu nunu zwzw ngng
 
-            array_splice($males,1,3,$females);
-            echo "<pre>".print_r($males,"true")."</pre>";    // agag susu yuyu nunu ngng
+            // array_splice($males,1,3,$females);
+            // echo "<pre>".print_r($males,"true")."</pre>";    // agag susu yuyu nunu ngng
 
 
             echo "<hr/>";

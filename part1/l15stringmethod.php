@@ -161,4 +161,13 @@
 
      // 31SM
 
+    //  stripslashes(string)
+    $str = "he\'s my father";
+    echo $str;
+    echo "<br/>";
+    echo stripslashes($str);
+    echo "<hr/>";
+
+
+    
 ?>
