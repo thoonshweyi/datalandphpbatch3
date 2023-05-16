@@ -35,10 +35,41 @@ json (modern use) -->
 
     echo "<hr/>";
 
+    // =>Decode by single parameter
+
     $students = '{"name":"aung aung","age":25,"city":"yangon"}';
     $studentsde = json_decode($students);
     // echo $studentsde;
-    echo "<pre>".print_R($studentsde,true)."</pre>";
+    echo "<pre>".print_r($studentsde,true)."</pre>";
+
+    // can't print
+    // echo $studentsde["name"];
+    // echo $studentsde["age"];
+    // echo $studentsde["city"];
+
+    // can print (-> object operator)
+    echo $studentsde->name."<br/>";
+    echo $studentsde->age."<br/>";
+    echo $studentsde->city."<br/>";
+
+    foreach($studentsde as $key=>$value){
+        echo $key . " is ". $value . "<br/>";
+    }
+
+    // =>Decode by multi parameter
+
+    $studentsde = json_decode($students,true);
+    // echo $studentsde;
+    echo "<pre>".print_r($studentsde,true)."</pre>";
+
+    echo $studentsde["name"]."<br/>";
+    echo $studentsde["age"]."<br/>";
+    echo $studentsde["city"]."<br/>";
+
+    // can't print (-> object operator)
+    // echo $studentsde->name."<br/>";
+    // echo $studentsde->age."<br/>";
+    // echo $studentsde->city."<br/>";
 ?>
 
 

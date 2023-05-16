@@ -12,12 +12,12 @@
     // require_once "path/filename.fileformat";
     // require_once ("path/filename.fileformat");
 
-    // echo "This is Article 1 <br/>";
-    // include "./l34headerpage.php";
-    // echo "<br/>";
-    // require "./l35contentpage.php";
-    // echo "<br/>";
-    // include ("./l36footerpage.php");
+    echo "This is Article 1 <br/>";
+    include "./l34headerpage.php";
+    echo "<br/>";
+    require "./l35contentpage.php";
+    echo "<br/>";
+    include ("./l36footerpage.php");
 
     echo "<hr/>";
 
