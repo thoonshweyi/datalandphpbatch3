@@ -108,6 +108,40 @@
     echo $persons[2]["name"];// Yin Yin
     echo "<br/>";
     echo $persons[2]["age"]; // 25
+    
+    echo "<hr/>";
   //---------------------------------------------------
+
+  $myarr = ["red","green","blue","white","black"];
+  $myarr[5] = "violet";
+  $myarr[6] = "pink";
+  $myarr[9] = "steelblue";
+  $myarr[0] = "gray";
+
+
+  echo "<pre>".print_r($myarr,true)."</pre>";
+
+
+  $myarrs = [];
+  $myarrs[] = "red";
+  $myarrs[] = "green";
+  $myarrs[] = "blue";
+  echo "<pre>".print_r($myarrs,true)."</pre>";
   echo "<hr/>";
+
+  //---------------------------------------------------
+
+//   =>in_array(searchvalue,array) Function
+
+    $myarrnums = [10,50,"60",90,80,"71",3,6,"8",500];
+
+    if(in_array("50",$myarrnums)){
+        echo "Match found";
+    }else{
+        echo "Match not found";
+    }
+
+    // result = "50" oki, 50 oki
+
+    echo "<hr/>";
 ?>

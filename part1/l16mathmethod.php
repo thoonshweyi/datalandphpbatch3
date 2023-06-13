@@ -71,6 +71,19 @@
 
     echo "<hr/>";
 
+    // log() Logrithm Function
+    // log(number,base);
+    // A logarithm is the power to which a number must be raised in order to get some other number
+
+    echo log(10,2)."<br/>"; //3.3219280948874
+    echo log(20,2)."<br/>"; //4.3219280948874
+    echo log(80,3)."<br/>"; // 3.9886925350038
+    echo "<hr/>";
+    
+
+
+
+
     
     // sqrt() Function
     // sqrt() Function
@@ -88,5 +101,18 @@
     echo rand()."<br/>";
     echo rand(1000,10000)."<br/>";
     echo "<hr/>";
+
+
+    // number_format() Function
+    // number_format(num,decimals)
+    // number_format(num,decimals,decimal_separator,thousands_separator)
+
+    echo number_format(1500,2)."<br/>"; //1,500.00
+    echo number_format(1250000,2)."<br/>"; //1,250,000.00
+    echo number_format(1250000,2,".",',')."<br/>"; //1,250,000.00
+    echo number_format(1250000,2,",",'.')."<br/>"; //1.250.000,00
+    echo number_format(1250000,2,".",'-')."<br/>"; //1-250-000.00
+
+
 
 ?>

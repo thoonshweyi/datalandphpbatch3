@@ -168,6 +168,44 @@
     echo stripslashes($str);
     echo "<hr/>";
 
+    // basename()
+    $path = "./assets/img/cover.jpg";
+    echo $path."<br/>"; // ./assets/img/cover.jpg
+    echo basename($path)."<br/>"; // cover.jpg
+    echo basename($path,".jpg")."<br/>"; //cover
+    echo basename($path,"ver.jpg")."<br/>"; //cover
+   
+    echo "<hr/>";
+
+    // pathinfo() Function
+    // pathinfo(path,option)
+
+    // PATHINFO_DIRNAME
+    // PATHINFO_BASENAME
+    // PATHINFO_EXTENSION
+    // PATHINFO_FILENAME
+
+
+    
+    $filepath = "./assets/img/user/cover.jpg";
+    // echo $filepath;
+    echo "<pre>".print_r(pathinfo($filepath),true);
+    // Array
+    // (
+    //     [dirname] => ./assets/img/user
+    //     [basename] => cover.jpg
+    //     [extension] => jpg
+    //     [filename] => cover
+    // )
+
+    echo pathinfo($filepath,PATHINFO_DIRNAME); //./assets/img/user
+    echo "<br/>";
+    echo pathinfo($filepath,PATHINFO_BASENAME); // cover.jpg
+    echo "<br/>";
+    echo pathinfo($filepath,PATHINFO_EXTENSION); // jpg
+    echo "<br/>";
+    echo pathinfo($filepath,PATHINFO_FILENAME); // cover
+    echo "<br/>";
 
     
 ?>
