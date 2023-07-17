@@ -5,14 +5,14 @@
    $filetmps = $_FILES["profile"]["tmp_name"];
    $fileerrs = $_FILES["profile"]["error"];
 
-   echo "<pre>".print_r($fileerrs,true)."</pre>";
+   //   echo "<pre>".print_r($fileerrs,true)."</pre>";
 
    $uploaddir = 'assets/';
 
    if(isset($_POST['submit'])){
      foreach($fileerrs as $idx => $fileerr){
-          echo $fileerr."<br/>";
-          echo $idx."<br/>";
+        //   echo $fileerr."<br/>";
+        //   echo $idx."<br/>";
 
 
           // UPLOAD_ERR_OK

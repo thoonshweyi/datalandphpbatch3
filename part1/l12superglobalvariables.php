@@ -65,6 +65,12 @@
     echo $_SERVER["SCRIPT_NAME"]; ///phpbatch3/part1/l12superglobalvariables.php
     // equal to "PHP_SELF"
     echo "<hr/>";
+
+    http://localhost/phpbatch3/part1/l12superglobalvariables.php?aungaung
+    echo $_SERVER["QUERY_STRING"]; // aungaung
+    echo "<hr/>";
+    // *search string of website
+    // *return string after "?"
 ?>
 
 
