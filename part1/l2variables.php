@@ -63,4 +63,62 @@
     // (ii)Local Variable Scope
     // (iii)Static Variable Scope
 
+    echo "<hr/>";
+
+    // =>Constant Variable
+    // define("variablename","value");
+    // string/int/boolean/float oki
+    // variable name should be uppercase
+    // redefined are deny
+
+    define("FULLNAME","Honey Nway Oo");
+    echo FULLNAME; // Honey Nway Oo
+    
+    echo "<br/>";
+
+    define("FULLNAME","Ma Ma Mya");
+    echo FULLNAME; // Honey Nway Oo
+
+    echo "<br/>";
+
+    define("DB_HOST","localhost");
+    define("DB_USER","root");
+    define("DB_PASS","mydatabasep@ssw0rd2022A");
+    define("DB_NAME","phpdbone");
+
+    echo DB_HOST;
+    echo "<br/>";
+    echo DB_USER;
+    echo "<br/>";
+    echo DB_PASS;
+    echo "<br/>";
+    echo DB_NAME;
+    echo "<br/>";
+
+    // =>constant("name") Function 
+    echo constant("DB_HOST");
+    echo "<br/>";
+    echo constant("DB_USER");
+    echo "<br/>";
+    echo constant("DB_PASS");
+    echo "<br/>";
+    echo constant("DB_NAME");
+    echo "<br/>";
+
+    // => constant: const keyword
+    // Note: // string/int/boolean/float oki
+    // variable name should be uppercase
+    // redefined are deny
+
+    const MESSAGE = "Hello sir, are you ready to learn PHP OOP concept??";
+    echo MESSAGE;
+    echo "<br/>";
+    echo constant("MESSAGE");
+    echo "<br/>";
+
+    const MESSAGE = "Hello sir, are you ready to learn ES6 concept??";
+    echo MESSAGE;
+    echo "<br/>";
+    echo constant("MESSAGE");
+    echo "<br/>";
 ?>

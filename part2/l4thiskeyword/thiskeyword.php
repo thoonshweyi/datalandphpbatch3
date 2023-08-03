@@ -1,12 +1,7 @@
 <?php
 
      class thiskeyword{
-          // Access Modifier
-          // (i) public = anywhere can access
-          // (ii) private = only access inside main class
-          // (iii) protected = subclass / extented class
 
-    
           public $companyname = "Data Land Technology";
           // private $companyname = "Data Land Technology";
           // protected $companyname = "Data Land Technology";
@@ -17,7 +12,7 @@
                echo $this->companyname;
                echo "<br/>";
 
-               echo $this->company = "ABC Co.,Ltd";
+               echo $this->companyname = "ABC Co.,Ltd";
           }
 
 
@@ -49,13 +44,14 @@
      
      $car1 = new vehicle();
      echo $car1->getbrandname();
-     echo $car1->setbrandname("Toyota");
+     $car1->setbrandname("Toyota");
      echo $car1->getbrandname();
 
-     $car2 = new vehicle();
-     echo $car2->getbrandname();
-     echo $car2->setbrandname("Ford");
-     echo $car2->getbrandname();
-     
+     echo "<br/>";
 
+     $car2 = new vehicle();
+     $car2->setbrandname("Mazada");
+     echo $car2->getbrandname();
+
+     echo "<hr/>";
 ?>
