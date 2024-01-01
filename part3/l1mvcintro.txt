@@ -1,0 +1,33 @@
+=MVC Framework (Model, View, Controller)
+
+
+--------------------------------------------
+
+=>Routing
+
+https://dlt.com/
+https://dlt.com/roles/index.php
+https://dlt.com/roles/edit.php
+https://dlt.com/roles/show/1.php
+
+
+Base URL = https://dlt.com/ (origin)
+Absolute URL = https://dlt.com/roles/index.php
+Relative URL 
+     (i) Prefix URL           = /roles/
+     (ii) Entry-Specific URL  = /show/1.php
+
+     =roles/index.php
+     roles defines as class
+     show defines as method
+     1 defined as parameter
+
+=> Folder access
+     - .htaccess (host access) file in the target Folder
+     *exact file name can still be accessed
+
+     # Options +Indexes
+     Options -Indexes
+
+     + default
+     -

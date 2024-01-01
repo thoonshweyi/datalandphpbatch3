@@ -1,0 +1,535 @@
+=>MVC
+     =>Routing
+
+          https://dlt.com/
+          https://dlt.com/roles/index.php
+          https://dlt.com/roles/edit.php
+          https://dlt.com/roles/show/1.php
+
+
+          Base URL = https://dlt.com/ (origin)
+          Absolute URL = https://dlt.com/roles/index.php
+          Relative URL 
+               (i) Prefix URL           = /roles/
+               (ii) Entry-Specific URL  = /show/1.php
+
+               https://dlt.com/roles/show/1.php
+               
+               /roles defines as class
+               /show defines as method
+               /1 defined as parameter
+
+     =>File Structure
+          part3 > app >
+                    config
+                    controllers
+                    helpers
+                    libraries
+                    models
+                    views
+
+     =>Default index file
+          part3 > index.php
+
+          http://localhost/phpbatch3/part3/
+          http://localhost/phpbatch3/part3/index.php
+          
+          *server automatically show index file
+          
+          http://localhost/phpbatch3/part3/app/
+          *show folder structure 
+
+     =>Route Query Catching 
+          =In index.php
+          <?php
+               echo "I am main index";
+               echo "<br/>";
+               echo $_SERVER["QUERY_STRING"];
+          ?>
+
+          http://localhost/phpbatch3/part3/index.php?name=susu
+          http://localhost/phpbatch3/part3/index.php?name=susu&gender=female
+          
+          *result
+               I am main index
+               name=susu&gender=female
+     
+          -The desired route format is 
+               http://localhost/phpbatch3/article/show/20
+     
+     =>Config File
+
+          -apache server configuration file for the website
+          -In this lession, we fill configure route
+
+          foldername > .htaccess
+          - .htaccess (host access) file in the target Folder
+
+          =>Folder Access
+               part3 > app > .htaccess
+               
+               =In .htaccess 
+                    # Options +Indexes
+                    Options -Indexes
+
+                    + = Allow access for the folder (default)
+                    - = Not allow                 
+                    
+               *for the security of API key, database password
+               *app> folder structure do not show
+               **but it can still access file with the exact file name
+               -it only concern with the target folder
+
+               http://localhost/phpbatch3/part3/app/
+               *error (403)
+                    Forbidden
+                    You don't have permission to access this resource.
+
+     =>Route Playing
+          =>Substitute url
+               part3 > .htaccess
+
+               =In .htaccess
+                    <IfModule mod_rewrite.c>
+                         RewriteEngine On
+                         RewriteRule ^(.+)$ index.php?url=$1
+
+                    </IfModule>
+
+               -<IfModule mod_rewrite.c></IfModule> = Accessing the file in the apache server
+               -RewriteEngine On = Granting to rewrite the file
+               -RewriteRule ^(.+)$ index.php?url=$1
+                    *any route (excluding the server root), will be redirected to index.php
+                    *pass down the whole requested path as one parameter to the file. 
+                    
+                    http://localhost/phpbatch3/part3/index.php
+                    *result
+                         I am main index
+                         url=index.php
+                    
+                    http://localhost/phpbatch3/part3/test
+                    http://localhost/phpbatch3/part3/test.php
+                    *result
+                         I am main index
+                         url=index.php
+
+          =>Actual File
+
+               http://localhost/phpbatch3/part3/test.php
+               http://localhost/phpbatch3/part3/test
+               http://localhost/phpbatch3/part3/app
+               *result
+                    I am main index
+                    url=index.php
+               *index file is opened even if actual file exist.
+               -----------------------------------------------
+               part3 > test.php
+               =In .htaccess
+                    <IfModule mod_rewrite.c>
+                         RewriteEngine On
+
+                         RewriteCond %{REQUEST_FILENAME} !-f
+                         RewriteRule ^(.+)$ index.php?url=$1
+
+                    </IfModule>
+               
+               http://localhost/phpbatch3/part3/test.php
+               *result
+                    Hello i am Test file.
+               
+               http://localhost/phpbatch3/part3/hay.php
+               *result
+                    I am main index
+                    url=hay.php
+
+               http://localhost/phpbatch3/part3/hay.php
+               *result
+                    I am main index
+                    url=hay.php                 
+
+          =>Actual Folder
+               http://localhost/phpbatch3/part3/app
+               *result
+                    I am main index
+                    url=app/
+
+               http://localhost/phpbatch3/part3/test
+               *result
+                    I am main index
+                    url=test/
+
+               http://localhost/phpbatch3/part3/article/show/1
+               result
+                    I am main index
+                    url=article/show/1
+               -----------------------------------------------
+               part3 > test
+
+               http://localhost/phpbatch3/part3/test/
+               *show directory structure 
+
+               http://localhost/phpbatch3/part3/app/
+               *show directory structure or Forbidden
+          
+          =>In .htaccess
+               <IfModule mod_rewrite.c>
+                    RewriteEngine On
+
+                    RewriteBase /phpbatch3/part3
+                    RewriteCond %{REQUEST_FILENAME} !-d
+                    RewriteCond %{REQUEST_FILENAME} !-f
+                    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+               </IfModule>
+               # QSA (append query string from request to substituted URL)
+               # L (last - stop procssing rules)
+               RewriteBase = For precise Substitution of the file
+
+          =>Getting Route 
+               =In index.php
+                    echo $_GET["url"];
+
+                    http://localhost/phpbatch3/part3/post/show/1 
+                    *result
+                         I am main index
+                         post/show/1
+
+               *it come with th format of class/method/parameter
+
+          =>For Linux
+               -only xampp/wampp will work, linux user need to make extra configuration and tasks.
+
+               sudo service apache2 stop 
+               sudo service apache2 start
+               sudo service apache2 restart
+               (or)
+               sudo service apache2 reload
+
+               =>(Apache Edit for rewrite)
+                    sudo a2enmod rewrite
+
+                    sudo nano /etc/apache2/site-enabled/000-default.config
+                    =Add these lines at the end   
+                         <Directory /var/www/html>
+                              AllowOverride All
+                         <Directory>
+
+          =>Route Dividing
+
+               app > bootstrap.php
+               app > libraries > Core.php
+
+                    =In Core.php
+                         <?php
+                              echo "i am core";
+                         ?>
+
+                    =In bootstrap.php
+                         <?php
+                              // Load Library
+                              require_once './libraries/Core.php';
+                              echo "i am bootstrap";
+                         ?>
+               
+                    http://localhost/phpbatch3/part3/app/bootstrap.php
+                    *result
+                         i am corei am bootstrap
+
+               part3 > public
+                    css > 
+                    js >
+                    img >
+                    index.php
+                    .htaccess
+
+                    =In index.php
+                         <?php
+                              echo "i am public index";
+                         ?>
+
+               =>Config
+
+                    http://localhost/phpbatch3/part3/public/index.php
+                    *result
+                         i am public index  
+
+                    http://localhost/phpbatch3/part3/public/show.php
+                    *result
+                         i am main index
+                         public/show.php
+                    
+                    =In .htaccess
+                         <IfModule mod_rewrite.c>
+                              RewriteEngine On
+
+                              RewriteBase /phpbatch3/part3/public
+                              RewriteCond %{REQUEST_FILENAME} !-d
+                              RewriteCond %{REQUEST_FILENAME} !-f
+                              RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+                         </IfModule>
+
+                    http://localhost/phpbatch3/part3/public/show.php
+                    http://localhost/phpbatch3/part3/public/show
+                    *result
+                         i am public index  
+
+                    public > show.php
+                    =In show.php
+                         <?php
+                              echo "i am show";
+                         ?>
+                    http://localhost/phpbatch3/part3/public/show.php
+                    *result
+                         i am show  
+
+               =>Indirect File Linking
+                    =In index.php
+                         <?php
+
+                              require_once "./../app/bootstrap.php";
+
+                              echo "i am public index";
+                         ?>
+
+                    =In bootstrap.php
+                         <?php
+                              // Load Library
+
+                              // require_once './libraries/Core.php';
+                              require_once 'libraries/Core.php';
+                              echo "i am bootstrap";
+                         ?>
+                    
+                    =In Core.php
+                         <?php
+                              echo "i am core";     
+                         ?>
+                    
+                    index -> boostrap -> Core
+
+                    *./ will get error
+                    *bootstrap code run in index
+                    ** It is the cause of problem
+
+                    *link image changing from js app
+                         html css js 
+                         -consider image file path from html not from js
+
+                    http://localhost/phpbatch3/part3/public/index.php
+                    *result
+                         i am core
+
+               =>Core file to divide Route
+                    =In index.php  
+                         <?php
+                              require_once "./../app/bootstrap.php";
+                              // echo "i am public index";
+
+                              $obj = new Core();
+                         ?>
+                    =In bootstrap.php
+                         <?php
+                              // Import Library
+                              // require_once './libraries/Core.php';
+                              require_once 'libraries/Core.php';
+                              // echo "i am bootstrap";
+                         ?>
+
+                    =In Core.php
+                         <?php
+                              // echo "i am core";
+                              class Core{
+
+                                   public function __construct(){
+                                        // echo "i am magic core";
+                                        $this->geturl();
+                                   }
+
+                                   public function geturl(){
+                                        echo $_GET['url'];
+                                   }
+                              }
+                         ?>
+                    
+                    http://localhost/phpbatch3/part3/public/role/show
+                    *result
+                         role/show
+
+                    =>Split Route As Array
+                         =In Core.php
+
+                              public function __construct(){
+                                   echo "i am magic core";
+                                   $this->geturl();
+
+                                   echo "<pre>".print_r($this->geturl(),true)."</pre>";
+                              }
+
+                              public function geturl(){
+                                   // echo $_GET['url'];
+
+                                   $url =  $_GET['url'];
+                                   echo $url."<br/>";
+
+                                   $url = explode("/",$url);
+                                   return $url;
+                              }
+                    
+                         http://localhost/phpbatch3/part3/public/role/show/1
+                         *result
+                              role/show/1
+                              Array
+                              (
+                              [0] => role
+                              [1] => show
+                              [2] => 1
+                              )
+
+                         http://localhost/phpbatch3/part3/public/role/show/1//
+                         *result 
+                              role/show/1/
+                              Array
+                              (
+                              [0] => role
+                              [1] => show
+                              [2] => 1
+                              [3] => 
+                              )
+                         
+                         http://localhost/phpbatch3/part3/public/role€/show€/1
+                         *result
+                              role€/show€/1
+                              Array
+                              (
+                              [0] => role€
+                              [1] => show€
+                              [2] => 1
+                              )
+                    
+                    =>Remove / and Unicode Characters
+                         =In Core.php
+                              public function geturl(){
+                                   // echo $_GET['url'];
+
+                                   $url =  isset($_GET["url"]) ? rtrim($_GET["url"],"/") : "";
+                                   // echo $url."<br/>";
+                                             
+                                   $url = filter_var($url,FILTER_SANITIZE_URL);
+                                   // echo $url."<br/>";
+                                   $url = explode("/",$url);
+                                   return $url;
+                              }
+
+                              filter_var(string,filter)
+                              -to fileter the string for url/email
+                         http://localhost/phpbatch3/part3/public/role/show/1//
+                         *result
+                              role/show/1
+                              Array
+                              (
+                              [0] => role
+                              [1] => show
+                              [2] => 1
+                              )
+                         http://localhost/phpbatch3/part3/public/role€/show€/1
+                         *result
+                              role/show/1
+                              Array
+                              (
+                              [0] => role
+                              [1] => show
+                              [2] => 1
+                              )
+                              
+               =>Cooperate with controllers
+                    app > controllers > Mainpage.php
+
+                    =In Mainpage.php
+                         <?php
+
+                              class Mainpage{
+                                   public function __construct(){
+                                        echo "I am Main Page <br/>";
+                                   }
+                              }
+                         ?>    
+                    
+                    =In Core.php
+                         Get Class by first value
+                         Get Method by second value
+                         Get Parameter by third value
+
+                         class Core{
+
+                              protected $curcontroller = "Mainpage";
+                              protected $curmethod = "index";
+
+                              public function __construct(){
+                                   // echo "i am magic core";
+                                   // $this->geturl();
+
+                                   // echo "<pre>".print_r($this->geturl(),true)."</pre>";
+
+                                   // Get Class by first value
+                                        $url = $this->geturl();
+                                        // echo ucwords($url[0]);
+                                        if(file_exists("../app/controllers/".ucwords($url[0]).".php")){
+                                             $this->curcontroller = ucwords($url[0]);
+                                             
+                                             // echo $url[0]."<br/>";
+                                             // echo $this->$curcontroller."<br/>";
+                                        }
+
+                                        // Require Controller
+                                        require_once("../app/controllers/".ucwords($url[0]).".php");
+                                        // Instantiate Controller Class
+                                        $this->curcontroller = new $this->curcontroller;
+                                        // *property variable is assigned to the controller object
+
+                                   // Get Method by second value
+                                        if(isset($url[1])){
+                                             if(method_exists($this->curcontroller,$url[1])){
+                                                  $this->curmethod = $url[1];
+                                             }
+                                        }
+                                        echo $this->curmethod;
+
+                                   // Get Parameter by third value
+                              }
+                              ....
+                         }
+
+                         -Capatalize the controller class
+                         -Set default controller class with the property variable
+                         -If the url provided controller class exist, 
+                              -overwrite the default controller class variable
+                              -Require Controller
+                              -If not controller class exist,
+                                   -Require Default Controller
+                         -Instantiate Controller Class
+
+                              =>Changing Substitute Path
+                                   part3 > .htaccess
+                                   =In .htaccess
+                                        #RewriteBase /phpbatch3/part3
+                                        RewriteBase /phpbatch3/part3/public
+                                   
+                                   http://localhost/phpbatch3/part3/mainpage
+                                   http://localhost/phpbatch3/mainpage
+                                   *result
+                                        I am Main Page
+                              
+                         -Set default method of controller class with the property variable
+                         -If the url provide a method
+                              -IF the method exist in the controller class
+                                   -overwerite the default method variable
+                              
+
+                         =In Mainpage.php
+                              public function index(){
+                                   
+                              }
+
+                              public function show(){
+
+                              }
